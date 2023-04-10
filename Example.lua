@@ -3,11 +3,11 @@
 repeat task.wait() until game:IsLoaded()
 
 --//----\\--
-local Repostry = 'https://raw.githubusercontent.com/EXFTB/LinoriaLib/main/Library.lua'
+local Repostry = "https://raw.githubusercontent.com/EXFTB/LinoriaLib/main/"
 
-local Library = loadstring(game:HttpGet(Repostry .. 'Library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(Repostry .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(Repostry .. 'addons/SaveManager.lua'))()
+local Library = loadstring(game:HttpGet(Repostry .. "Library.lua"))()
+local ThemeManager = loadstring(game:HttpGet(Repostry .. "ThemeManager.lua"))()
+local SaveManager = loadstring(game:HttpGet(Repostry .. "SaveManager.lua"))()
 --\\----//--
 
 --//----\\--
