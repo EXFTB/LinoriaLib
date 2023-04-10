@@ -8,7 +8,6 @@ local Repostry = "https://raw.githubusercontent.com/EXFTB/LinoriaLib/main/"
 local Library = loadstring(game:HttpGet(Repostry .. "Library.lua"))()
 local ThemeManager = loadstring(game:HttpGet(Repostry .. "ThemeManager.lua"))()
 local SaveManager = loadstring(game:HttpGet(Repostry .. "SaveManager.lua"))()
-local ServiceManager = loadstring(game:HttpGet(Repostry.. "ServiceManager.lua"))
 --\\----//--
 
 --//----\\--
