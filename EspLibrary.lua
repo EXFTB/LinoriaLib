@@ -227,7 +227,7 @@ function boxBase:Update()
 
             if Vis5 then
                 self.Components.Health.Visible = true
-                self.Components.Health.Position = Vector2.new(TagPos.X, TagPos.Y + 28)               
+                self.Components.Health.Position = Vector2.new(TagPos.X, TagPos.Y + 30)               
                 self.Components.Health.Text = "[" .. math.floor(self.Player.Character.Humanoid.Health + 0.5)  .. " / " .. self.Player.Character.Humanoid.MaxHealth .. "]"
                 self.Components.Health.Color = color
             else
