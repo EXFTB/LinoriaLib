@@ -2,11 +2,13 @@
 local ESP = {
     Enabled = false,
     Boxes = false,
-    BoxShift = CFrame.new(0,-1.5,0),
-    BoxSize = Vector3.new(4,6,0),
+    BoxShift = CFrame.new(0, -1.5, 0),
+    BoxSize = Vector3.new(4, 6, 0),
     Color = Color3.fromRGB(0, 85, 255),
     FaceCamera = false,
     Names = false,
+    Health = false,
+    Tool = false,
     TeamColor = false,
     Thickness = 2,
     AttachShift = 1,
@@ -149,7 +151,7 @@ function boxBase:Update()
 
     local color
     if ESP.Highlighted == self.Object then
-       color = ESP.HighlightColor
+        color = ESP.HighlightColor
     else
         color = self.Color or self.ColorDynamic and self:ColorDynamic() or ESP:GetColor(self.Object) or ESP.Color
     end
@@ -217,6 +219,48 @@ function boxBase:Update()
         end
     else
         self.Components.Quad.Visible = false
+    end
+
+    if self.Player then
+        if ESP.Health then
+            local TagPos, Vis5 = WorldToViewportPoint(cam, locs.TagPos.p)
+
+            if Vis5 then
+                self.Components.Health.Visible = true
+                self.Components.Health.Position = Vector2.new(TagPos.X, TagPos.Y + 16)               
+                self.Components.Health.Text = math.floor(self.Player.Character.Humanoid.Health + 0.5)  .. " / " .. self.Player.Character.Humanoid.MaxHealth
+                self.Components.Health.Color = color
+            else
+                self.Components.Health.Visible = false
+            end
+        else
+            self.Components.Health.Visible = false
+        end
+    else
+        self.Components.Health.Visible = false
+    end
+
+    if self.Player then
+        if ESP.Tool then
+            local TagPos, Vis5 = WorldToViewportPoint(cam, locs.TagPos.p)
+
+            if Vis5 then
+                self.Components.Tool.Visible = true
+                self.Components.Tool.Position = Vector2.new(TagPos.X, TagPos.Y - 14)
+                if self.Player.Character:FindFirstChildOfClass("Tool") then
+                    self.Components.Tool.Text = self.Player.Character:FindFirstChildOfClass("Tool").Name
+                    self.Components.Tool.Color = color
+                else
+                    self.Components.Tool.Visible = false
+                end
+            else
+                self.Components.Tool.Visible = false
+            end
+        else
+            self.Components.Tool.Visible = false
+        end
+    else
+        self.Components.Tool.Visible = false
     end
 
     if ESP.Names then
@@ -295,6 +339,20 @@ function ESP:Add(obj, options)
 		Outline = true,
         Size = 19,
         Visible = self.Enabled and self.Names
+	})
+	box.Components["Health"] = Draw("Text", {
+		Color = box.Color,
+		Center = true,
+		Outline = true,
+		Size = 15,
+		Visible = self.Enabled and self.Health
+	})
+    box.Components["Tool"] = Draw("Text", {
+		Color = box.Color,
+		Center = true,
+		Outline = true,
+		Size = 15,
+		Visible = self.Enabled and self.Tool
 	})
 	box.Components["Distance"] = Draw("Text", {
 		Color = box.Color,
