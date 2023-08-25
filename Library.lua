@@ -996,6 +996,10 @@ do
                 return;
             end;
 
+            if KeyPicker.Value == "" then
+                return;
+            end;
+
             local State = KeyPicker:GetState();
 
             ContainerLabel.Text = string.format('[%s] %s (%s)', KeyPicker.Value, Info.Text, KeyPicker.Mode);
